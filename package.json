@@ -34,12 +34,12 @@
     "docs": "typedoc --options typedoc.json"
   },
   "dependencies": {
-    "gl-matrix": "3.3.0",
-    "promise-polyfill": "8.2.0"
+    "gl-matrix": "3.4.3",
+    "promise-polyfill": "8.3.0"
   },
   "devDependencies": {
-    "gulpfile-config": "1.0.0-alpha.14",
+    "gulpfile-config": "1.0.0-alpha.23",
     "stats.js": "0.17.0",
-    "typedoc": "0.17.1"
+    "typedoc": "0.26.11"
   }
 }
