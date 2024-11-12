@@ -8,19 +8,6 @@ export var BufferFloatType;
     BufferFloatType[BufferFloatType["HALF_FLOAT"] = 1] = "HALF_FLOAT";
 })(BufferFloatType || (BufferFloatType = {}));
 export class Buffer {
-    constructor(gl, BW, BH, index) {
-        const buffer = gl.createFramebuffer();
-        const texture = Buffer.getTexture(gl, BW, BH, index);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        this.texture = texture;
-        this.buffer = buffer;
-        this.BW = BW;
-        this.BH = BH;
-        this.index = index;
-    }
     static getFloatType(gl) {
         let extension;
         if (Context.isWebGl2(gl)) {
@@ -95,6 +82,19 @@ export class Buffer {
         }
         // console.log('getTexture', 'internalFormat', internalFormat === (gl as WebGL2RenderingContext).RGBA16F, 'format', format === gl.RGBA, 'type', type === (gl as WebGL2RenderingContext).HALF_FLOAT, 'status', status === gl.FRAMEBUFFER_COMPLETE);
         return texture;
+    }
+    constructor(gl, BW, BH, index) {
+        const buffer = gl.createFramebuffer();
+        const texture = Buffer.getTexture(gl, BW, BH, index);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        this.texture = texture;
+        this.buffer = buffer;
+        this.BW = BW;
+        this.BH = BH;
+        this.index = index;
     }
     resize(gl, BW, BH) {
         if (BW !== this.BW || BH !== this.BH) {

@@ -95,7 +95,7 @@ var Context = /** @class */ (function () {
             var regexp = /(?:^\s*)((?:#if|#elif)(?:\s*)(defined\s*\(\s*VERTEX)(?:\s*\))|(?:#ifdef)(?:\s*VERTEX)(?:\s*))/gm;
             var matches = regexp.exec(fragmentString);
             if (matches !== null) {
-                vertexString = version === ContextVersion.WebGl2 ? "#version 300 es\n#define VERTEX\n" + fragmentString : "#define VERTEX\n" + fragmentString;
+                vertexString = version === ContextVersion.WebGl2 ? "#version 300 es\n#define VERTEX\n".concat(fragmentString) : "#define VERTEX\n".concat(fragmentString);
             }
         }
         return vertexString;
@@ -192,7 +192,7 @@ var Context = /** @class */ (function () {
             else {
                 var container = canvas.parentNode;
                 if (container) {
-                    container.innerHTML = "<div class=\"glsl-canvas--error\">" + html + "</div>";
+                    container.innerHTML = "<div class=\"glsl-canvas--error\">".concat(html, "</div>");
                 }
             }
         }
@@ -214,7 +214,7 @@ var Context = /** @class */ (function () {
                     context.getExtension(key);
                 }
                 else {
-                    logger_1.default.warn("GlslCanvas " + key + " not supported");
+                    logger_1.default.warn("GlslCanvas ".concat(key, " not supported"));
                 }
             });
             // context.getExtension('OES_standard_derivatives');
@@ -229,7 +229,7 @@ var Context = /** @class */ (function () {
             else {
                 var container = canvas.parentNode;
                 if (container) {
-                    container.innerHTML = "<div class=\"glsl-canvas--error\">" + html + "</div>";
+                    container.innerHTML = "<div class=\"glsl-canvas--error\">".concat(html, "</div>");
                 }
             }
         }
@@ -253,7 +253,7 @@ var Context = /** @class */ (function () {
     Context.createShader = function (gl, source, type, offset) {
         if (offset === void 0) { offset = 0; }
         var shader = gl.createShader(type);
-        source = source.replace(/precision\s+(.+)\s+float/, "precision " + Context.precision + " float");
+        source = source.replace(/precision\s+(.+)\s+float/, "precision ".concat(Context.precision, " float"));
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
         var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
@@ -261,7 +261,7 @@ var Context = /** @class */ (function () {
             // Something went wrong during compilation; get the error
             Context.lastError = gl.getShaderInfoLog(shader);
             // console.log('lastError', Context.lastError);
-            logger_1.default.error("*** Error compiling shader: " + Context.lastError);
+            logger_1.default.error("*** Error compiling shader: ".concat(Context.lastError));
             // main.trigger('error', {
             gl.deleteShader(shader);
             throw ({
@@ -291,7 +291,7 @@ var Context = /** @class */ (function () {
         if (!linked) {
             // something went wrong with the link
             Context.lastError = gl.getProgramInfoLog(program);
-            logger_1.default.error("Error in program linking: " + Context.lastError);
+            logger_1.default.error("Error in program linking: ".concat(Context.lastError));
             gl.deleteProgram(program);
             return null;
         }

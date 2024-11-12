@@ -232,8 +232,8 @@ var Texture = /** @class */ (function (_super) {
                 }
             }
             else {
-                var message = "the 'element' parameter (`element: " + JSON.stringify(originalElement) + "`) must be a CSS selector string, or a <canvas>, <image> or <video> object";
-                logger_1.default.log("Texture '" + _this.key + "': " + message, options);
+                var message = "the 'element' parameter (`element: ".concat(JSON.stringify(originalElement), "`) must be a CSS selector string, or a <canvas>, <image> or <video> object");
+                logger_1.default.log("Texture '".concat(_this.key, "': ").concat(message), options);
                 reject(message);
             }
         });
@@ -311,7 +311,7 @@ var Texture = /** @class */ (function (_super) {
             filtering = filtering === TextureFilteringType.MipMap ? TextureFilteringType.Linear : filtering;
             wrapS = wrapT = gl.CLAMP_TO_EDGE;
             if (options.repeat || options.TEXTURE_WRAP_S || options.TEXTURE_WRAP_T) {
-                logger_1.default.warn("GlslCanvas: cannot repeat texture " + options.url + " cause is not power of 2.");
+                logger_1.default.warn("GlslCanvas: cannot repeat texture ".concat(options.url, " cause is not power of 2."));
             }
         }
         this.powerOf2 = powerOf2;

@@ -78,7 +78,7 @@ var BoxGeometry = /** @class */ (function (_super) {
             [0.0, 1.0, 0.0, 1.0],
             [0.0, 0.0, 1.0, 1.0],
             [1.0, 1.0, 0.0, 1.0],
-            [1.0, 0.0, 1.0, 1.0],
+            [1.0, 0.0, 1.0, 1.0], // Left face: purple
         ];
         // Convert the array of colors into a table for all the vertices.
         var colors = [];

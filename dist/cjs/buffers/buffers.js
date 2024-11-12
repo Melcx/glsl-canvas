@@ -262,14 +262,14 @@ var Buffers = /** @class */ (function (_super) {
             while ((matches = regexp.exec(fragmentString)) !== null) {
                 var i = matches[3] || matches[4];
                 var key = 'u_buffer' + i;
-                var bufferFragmentString = context_1.default.isWebGl2(gl) ? "#version 300 es\n#define BUFFER_" + i + "\n" + fragmentString : "#define BUFFER_" + i + "\n" + fragmentString;
+                var bufferFragmentString = context_1.default.isWebGl2(gl) ? "#version 300 es\n#define BUFFER_".concat(i, "\n").concat(fragmentString) : "#define BUFFER_".concat(i, "\n").concat(fragmentString);
                 var buffer = new IOBuffer(count, key, vertexString, bufferFragmentString);
                 buffer.create(gl, gl.drawingBufferWidth, gl.drawingBufferHeight);
                 if (buffer.program) {
                     buffers.set(key, buffer);
                 }
                 else {
-                    throw ("buffer error " + key);
+                    throw ("buffer error ".concat(key));
                 }
                 count += 4;
             }

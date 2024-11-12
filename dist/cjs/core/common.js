@@ -13,11 +13,11 @@ var Common = /** @class */ (function () {
             };
             xhr.onerror = function (error) {
                 console.log('Common.error', error);
-                reject(new Error("Network request failed for url " + url));
+                reject(new Error("Network request failed for url ".concat(url)));
             };
             xhr.ontimeout = function (error) {
                 // console.log(error);
-                reject(new Error("Network request failed for url " + url));
+                reject(new Error("Network request failed for url ".concat(url)));
             };
             xhr.onabort = function () {
                 reject(new Error('Aborted'));

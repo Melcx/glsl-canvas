@@ -191,7 +191,7 @@ var Uniforms = /** @class */ (function (_super) {
                     return new Uniform({
                         method: method,
                         type: type,
-                        key: key + "[" + index + "]",
+                        key: "".concat(key, "[").concat(index, "]"),
                         values: [texture]
                     });
                 });
