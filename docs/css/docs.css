@@ -1,7 +1,8 @@
 html,
 body {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+}
 
 body {
   margin: 0;
@@ -9,13 +10,16 @@ body {
   background: #040404;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+}
 
 h3 {
-  padding: 0 15px; }
+  padding: 0 15px;
+}
 
 h4 {
-  font-weight: 100; }
+  font-weight: 100;
+}
 
 .btn-toggle {
   background: blue;
@@ -26,20 +30,24 @@ h4 {
   text-transform: uppercase;
   margin: 5px 0;
   outline: none;
-  cursor: pointer; }
-  .btn-toggle:hover, .btn-toggle:active {
-    background: #0000e6; }
+  cursor: pointer;
+}
+.btn-toggle:hover, .btn-toggle:active {
+  background: rgb(0, 0, 229.5);
+}
 
 .examples {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  flex-wrap: wrap; }
-  .examples .example {
-    width: 320px;
-    height: auto;
-    margin: 0 10px 10px 0;
-    flex: 0 0 320px; }
+  flex-wrap: wrap;
+}
+.examples .example {
+  width: 320px;
+  height: auto;
+  margin: 0 10px 10px 0;
+  flex: 0 0 320px;
+}
 
 .canvas {
   width: 320px;
@@ -50,24 +58,30 @@ h4 {
   box-sizing: border-box;
   -webkit-user-select: none;
       -ms-user-select: none;
-          user-select: none; }
-  .canvas[controls].animated {
-    cursor: pointer;
-    transition: opacity 300ms cubic-bezier(0.4, 0, 0.6, 1); }
-    .canvas[controls].animated.paused {
-      opacity: 0.5; }
-      .canvas[controls].animated.paused:hover {
-        opacity: 0.75; }
-    .canvas[controls].animated.playing {
-      border-color: blue; }
+          user-select: none;
+}
+.canvas[controls].animated {
+  cursor: pointer;
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.6, 1);
+}
+.canvas[controls].animated.paused {
+  opacity: 0.5;
+}
+.canvas[controls].animated.paused:hover {
+  opacity: 0.75;
+}
+.canvas[controls].animated.playing {
+  border-color: blue;
+}
 
 .renderer .canvas {
   width: 640px;
-  height: 344px; }
-
+  height: 344px;
+}
 .renderer .examples .example {
   width: 640px;
-  flex: 0 0 640px; }
+  flex: 0 0 640px;
+}
 
 video {
   width: 320px;
@@ -76,10 +90,11 @@ video {
   border-radius: 5px;
   overflow: hidden;
   box-sizing: border-box;
-  -o-object-fit: cover;
-     object-fit: cover; }
+  object-fit: cover;
+}
 
 * {
   -webkit-user-select: none;
       -ms-user-select: none;
-          user-select: none; }
+          user-select: none;
+}
