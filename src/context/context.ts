@@ -103,28 +103,38 @@ ${fragmentString}`;
 		return vertexString;
 	}
 
+	static sanitizeIncludeFragment(fragmentString: string): string {
+		// Remove #version lines
+		const versionLinesRegex = /^#version.*$/gm;
+		return fragmentString.replace(versionLinesRegex, '');
+	}
+	
 	static getIncludes(input: string | undefined, workpath: string = ''): Promise<string | undefined> {
 		if (input === undefined) {
 			return Promise.resolve(input);
 		}
+	
+		// Sanitize the input by removing #version lines
+		const sanitizedInput = Context.sanitizeIncludeFragment(input);
+	
 		const regex = /#include\s*['|"](.*.glsl)['|"]/gm;
 		const promises = [];
 		let i = 0;
 		let match;
-		while ((match = regex.exec(input)) !== null) {
-			promises.push(Promise.resolve(input.slice(i, match.index)));
+		while ((match = regex.exec(sanitizedInput)) !== null) {
+			promises.push(Promise.resolve(sanitizedInput.slice(i, match.index)));
 			i = match.index + match[0].length;
 			const filePath = match[1];
 			const url = Common.getResource(filePath, workpath);
 			const nextWorkpath = filePath.indexOf(':/') === -1 ? Common.dirname(url) : '';
 			promises.push(Common.fetch(url).then(input => Context.getIncludes(input, nextWorkpath)));
 		}
-		promises.push(Promise.resolve(input.slice(i)));
+		promises.push(Promise.resolve(sanitizedInput.slice(i)));
 		return Promise.all(promises).then(chunks => {
 			return chunks.join('');
 		});
 	}
-
+	
 	static isWebGl(context: WebGLRenderingContext | WebGL2RenderingContext): boolean {
 		return context instanceof WebGLRenderingContext;
 	}
