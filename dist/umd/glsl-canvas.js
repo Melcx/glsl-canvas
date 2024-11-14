@@ -257,32 +257,31 @@ var Context = /*#__PURE__*/function () {
     return fragmentString.replace(versionLinesRegex, '');
   };
   Context.getIncludes = function getIncludes(input, workpath) {
+    var _this = this;
     if (workpath === void 0) {
       workpath = '';
     }
     if (input === undefined) {
       return Promise.resolve(input);
     }
-    // Sanitize the input by removing #version lines
-    var sanitizedInput = Context.sanitizeIncludeFragment(input);
     var regex = /#include\s*['|"](.*.glsl)['|"]/gm;
     var promises = [];
     var i = 0;
     var match;
     var _loop = function _loop() {
-      promises.push(Promise.resolve(sanitizedInput.slice(i, match.index)));
+      promises.push(Promise.resolve(input.slice(i, match.index)));
       i = match.index + match[0].length;
       var filePath = match[1];
       var url = Common.getResource(filePath, workpath);
       var nextWorkpath = filePath.indexOf(':/') === -1 ? Common.dirname(url) : '';
-      promises.push(Common.fetch(url).then(function (input) {
-        return Context.getIncludes(input, nextWorkpath);
+      promises.push(Common.fetch(url).then(function (include) {
+        return Context.getIncludes(_this.sanitizeIncludeFragment(include), nextWorkpath);
       }));
     };
-    while ((match = regex.exec(sanitizedInput)) !== null) {
+    while ((match = regex.exec(input)) !== null) {
       _loop();
     }
-    promises.push(Promise.resolve(sanitizedInput.slice(i)));
+    promises.push(Promise.resolve(input.slice(i)));
     return Promise.all(promises).then(function (chunks) {
       return chunks.join('');
     });
